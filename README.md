@@ -20,7 +20,7 @@ A complete QR Code Management System built with **NestJS**, **MongoDB**, and **J
 ### Prerequisites
 
 Ensure you have the following installed:
-- Node.js
+- Nest.js
 - MongoDB
 
 ### Steps
