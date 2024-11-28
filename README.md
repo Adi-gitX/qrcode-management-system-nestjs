@@ -1,5 +1,3 @@
-Here is the improved and neatly organized version of the README file, separated into blocks and without markdown at the start:
-
 # QR Code Management System
 
 A complete QR Code Management System built with **NestJS**, **MongoDB**, and **JWT** for authentication. It allows users to generate static and dynamic QR codes, track events, and view analytics.
