@@ -1,99 +1,303 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# QR Code Management System
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+The QR Code Management System is a backend application built using **NestJS** that provides API endpoints for managing static and dynamic QR codes. It also includes event tracking and analytics for QR code interactions.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+1. **Authentication**
+   - User signup and login with JWT-based authentication.
+   
+2. **Static QR Codes**
+   - Generate static QR codes for fixed URLs.
 
-## Project setup
+3. **Dynamic QR Codes**
+   - Generate dynamic QR codes that can be updated with new URLs.
 
-```bash
-$ npm install
+4. **Event Tracking**
+   - Track QR code interactions including timestamp, location, and device type.
+
+5. **Analytics**
+   - Get insights such as total scans and unique users for each QR code.
+
+---
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+git clone https://github.com/Adi-gitX/qrcode-management-system-nestjs.git
+cd qrcode-management-system-nestjs
+
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Configure environment variables:
+   - Create a `.env` file in the root directory with the following:
+     ```env
+     PORT=3000
+     DATABASE_URL=your-database-url
+     JWT_SECRET=your-jwt-secret
+     ```
+
+4. Start the application:
+   ```bash
+   npm run start:dev
+   ```
+
+---
+
+## API Endpoints
+
+### **Authentication**
+
+1. **Signup**
+   - **Method**: `POST`
+   - **URL**: `/auth/signup`
+   - **Request Body**:
+     ```json
+     {
+       "username": "your-username",
+       "password": "your-password"
+     }
+     ```
+   - **Response**:
+     ```json
+     {
+       "_id": "user-id",
+       "username": "your-username",
+       "password": "hashed-password",
+       "__v": 0
+     }
+     ```
+
+2. **Login**
+   - **Method**: `POST`
+   - **URL**: `/auth/login`
+   - **Request Body**:
+     ```json
+     {
+       "username": "your-username",
+       "password": "your-password"
+     }
+     ```
+   - **Response**:
+     ```json
+     {
+       "access_token": "your-jwt-token"
+     }
+     ```
+
+---
+
+### **QR Code Management**
+
+1. **Generate Static QR Code**
+   - **Method**: `POST`
+   - **URL**: `/qr/static`
+   - **Request Body**:
+     ```json
+     {
+       "url": "https://example.com"
+     }
+     ```
+   - **Response**:
+     ```json
+     {
+       "qrCode": "data:image/png;base64,..."
+     }
+     ```
+
+2. **Generate Dynamic QR Code**
+   - **Method**: `POST`
+   - **URL**: `/qr/dynamic`
+   - **Request Body**:
+     ```json
+     {
+       "initialUrl": "https://example.com"
+     }
+     ```
+   - **Response**:
+     ```json
+     {
+       "id": "qr-code-id",
+       "initialUrl": "https://example.com"
+     }
+     ```
+
+3. **Update Dynamic QR Code**
+   - **Method**: `PUT`
+   - **URL**: `/qr/{id}/update`
+   - **Request Body**:
+     ```json
+     {
+       "newUrl": "https://new-example.com"
+     }
+     ```
+   - **Response**:
+     ```json
+     {
+       "id": "qr-code-id",
+       "url": "https://new-example.com"
+     }
+     ```
+
+---
+
+### **Event Tracking**
+
+1. **Track Event**
+   - **Method**: `POST`
+   - **URL**: `/qr/{id}/track`
+   - **Request Body**:
+     ```json
+     {
+       "timestamp": "2024-11-29T02:42:23.000Z",
+       "location": "New York",
+       "deviceType": "mobile",
+       "userId": "user-id"
+     }
+     ```
+   - **Response**:
+     ```json
+     {
+       "success": true
+     }
+     ```
+
+2. **Get Tracked Events**
+   - **Method**: `GET`
+   - **URL**: `/qr/{id}/events`
+   - **Response**:
+     ```json
+     [
+       {
+         "qrId": "qr-code-id",
+         "timestamp": "2024-11-29T02:42:23.000Z",
+         "location": "New York",
+         "deviceType": "mobile",
+         "userId": "user-id"
+       },
+       ...
+     ]
+     ```
+
+---
+
+### **Analytics**
+
+1. **Get Analytics**
+   - **Method**: `GET`
+   - **URL**: `/analytics/{id}`
+   - **Response**:
+     ```json
+     {
+       "totalScans": 10,
+       "uniqueUsers": 5
+     }
+     ```
+
+---
+
+## Postman Collection
+
+You can import the Postman collection to test the API endpoints. Save the following JSON as `postman_collection.json` and import it into Postman:
+
+```json
+{
+  "info": {
+    "name": "QR Code Management System",
+    "description": "API endpoints for QR Code Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Signup",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"your-username\",\n  \"password\": \"your-password\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/auth/signup",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["auth", "signup"]
+        }
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"your-username\",\n  \"password\": \"your-password\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["auth", "login"]
+        }
+      }
+    },
+    ...
+  ]
+}
 ```
 
-## Compile and run the project
+---
 
+## Running Tests
+
+To run tests for the application:
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run test
 ```
 
-## Run tests
+---
 
-```bash
-# unit tests
-$ npm run test
+## Contributing
 
-# e2e tests
-$ npm run test:e2e
+1. Fork the repository.
+2. Create a new branch for your feature.
+3. Commit your changes.
+4. Push to your fork.
+5. Create a pull request.
 
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+This project is licensed under the [MIT License](LICENSE).
