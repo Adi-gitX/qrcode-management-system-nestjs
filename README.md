@@ -57,8 +57,6 @@ Ensure you have the following installed:
 
 ## API Endpoints
 
-Here is the updated README for the QR Code Management API with Postman collection and endpoints, formatted for clarity:
-
 ---
 
 ## Authentication
