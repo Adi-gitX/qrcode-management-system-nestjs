@@ -57,12 +57,16 @@ Ensure you have the following installed:
 
 ## API Endpoints
 
-### Authentication
+Here is the updated README for the QR Code Management API with Postman collection and endpoints, formatted for clarity:
 
-#### **Signup**
+---
+
+## Authentication
+
+### 1. **Signup**
 - **Method**: `POST`
-- **URL**: `/auth/signup`
-- **Headers**:
+- **URL**: `http://localhost:3000/auth/signup`
+- **Headers**: 
   - `Content-Type: application/json`
 - **Body**:
   ```json
@@ -81,10 +85,10 @@ Ensure you have the following installed:
   }
   ```
 
-#### **Login**
+### 2. **Login**
 - **Method**: `POST`
-- **URL**: `/auth/login`
-- **Headers**:
+- **URL**: `http://localhost:3000/auth/login`
+- **Headers**: 
   - `Content-Type: application/json`
 - **Body**:
   ```json
@@ -100,14 +104,27 @@ Ensure you have the following installed:
   }
   ```
 
+### 3. **Get User Details**
+- **Method**: `GET`
+- **URL**: `http://localhost:3000/auth/me`
+- **Headers**: 
+  - `Authorization: Bearer your-jwt-token`
+- **Response**:
+  ```json
+  {
+    "userId": "user-id",
+    "username": "your-username"
+  }
+  ```
+
 ---
 
-### QR Code Management
+## QR Code Management
 
-#### **Generate Static QR Code**
+### 4. **Generate Static QR Code**
 - **Method**: `POST`
-- **URL**: `/qr/static`
-- **Headers**:
+- **URL**: `http://localhost:3000/qr/static`
+- **Headers**: 
   - `Content-Type: application/json`
   - `Authorization: Bearer your-jwt-token`
 - **Body**:
@@ -123,10 +140,10 @@ Ensure you have the following installed:
   }
   ```
 
-#### **Generate Dynamic QR Code**
+### 5. **Generate Dynamic QR Code**
 - **Method**: `POST`
-- **URL**: `/qr/dynamic`
-- **Headers**:
+- **URL**: `http://localhost:3000/qr/dynamic`
+- **Headers**: 
   - `Content-Type: application/json`
   - `Authorization: Bearer your-jwt-token`
 - **Body**:
@@ -143,10 +160,10 @@ Ensure you have the following installed:
   }
   ```
 
-#### **Update Dynamic QR Code**
+### 6. **Update Dynamic QR Code**
 - **Method**: `PUT`
-- **URL**: `/qr/{id}/update`
-- **Headers**:
+- **URL**: `http://localhost:3000/qr/{id}/update`
+- **Headers**: 
   - `Content-Type: application/json`
   - `Authorization: Bearer your-jwt-token`
 - **Body**:
@@ -163,14 +180,31 @@ Ensure you have the following installed:
   }
   ```
 
+### 7. **Get User's QR Codes**
+- **Method**: `GET`
+- **URL**: `http://localhost:3000/qr/my-codes`
+- **Headers**: 
+  - `Authorization: Bearer your-jwt-token`
+- **Response**:
+  ```json
+  [
+    {
+      "id": "qr-code-id",
+      "initialUrl": "https://example.com",
+      "url": "https://new-example.com"
+    },
+    ...
+  ]
+  ```
+
 ---
 
-### Event Tracking
+## Event Tracking
 
-#### **Track Event**
+### 8. **Track Event**
 - **Method**: `POST`
-- **URL**: `/qr/{id}/track`
-- **Headers**:
+- **URL**: `http://localhost:3000/qr/{id}/track`
+- **Headers**: 
   - `Content-Type: application/json`
   - `Authorization: Bearer your-jwt-token`
 - **Body**:
@@ -189,10 +223,10 @@ Ensure you have the following installed:
   }
   ```
 
-#### **Get Tracked Events**
+### 9. **Get Tracked Events**
 - **Method**: `GET`
-- **URL**: `/qr/{id}/events`
-- **Headers**:
+- **URL**: `http://localhost:3000/qr/{id}/events`
+- **Headers**: 
   - `Authorization: Bearer your-jwt-token`
 - **Response**:
   ```json
@@ -210,12 +244,12 @@ Ensure you have the following installed:
 
 ---
 
-### Analytics
+## Analytics
 
-#### **Get Analytics**
+### 10. **Get Analytics**
 - **Method**: `GET`
-- **URL**: `/analytics/{id}`
-- **Headers**:
+- **URL**: `http://localhost:3000/analytics/{id}`
+- **Headers**: 
   - `Authorization: Bearer your-jwt-token`
 - **Response**:
   ```json
@@ -226,6 +260,176 @@ Ensure you have the following installed:
   ```
 
 ---
+
+## Example Postman Collection
+
+You can create a Postman collection with the above endpoints. Below is an example JSON structure for the collection:
+
+```json
+{
+  "info": {
+    "name": "QR Code Management System",
+    "description": "API endpoints for QR Code Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Signup",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"your-username\",\n  \"password\": \"your-password\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/auth/signup",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["auth", "signup"]
+        }
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"your-username\",\n  \"password\": \"your-password\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "Generate Static QR Code",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer your-jwt-token"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"url\": \"https://example.com\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/qr/static",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["qr", "static"]
+        }
+      }
+    },
+    {
+      "name": "Generate Dynamic QR Code",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer your-jwt-token"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"initialUrl\": \"https://example.com\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/qr/dynamic",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["qr", "dynamic"]
+        }
+      }
+    },
+    {
+      "name": "Update Dynamic QR Code",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+
+
+            "value": "Bearer your-jwt-token"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"newUrl\": \"https://new-example.com\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/qr/{id}/update",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["qr", "{id}", "update"]
+        }
+      }
+    }
+  ]
+}
+```
 
 ## License
 

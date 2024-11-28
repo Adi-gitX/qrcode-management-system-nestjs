@@ -10,6 +10,9 @@ export class QrCode {
 
   @Prop()
   url: string;
+
+  @Prop({ required: true })
+  userId: string;
 }
 
 export const QrCodeSchema = SchemaFactory.createForClass(QrCode);

@@ -12,13 +12,17 @@ export class QrService {
     return QRCode.toDataURL(url);
   }
 
-  async generateDynamicQrCode(initialUrl: string): Promise<QrCode> {
-    const qrCode = new this.qrCodeModel({ initialUrl });
+  async generateDynamicQrCode(initialUrl: string, userId: string): Promise<QrCode> {
+    const qrCode = new this.qrCodeModel({ initialUrl, userId });
     await qrCode.save();
     return qrCode;
   }
 
   async updateDynamicQrCode(id: string, newUrl: string): Promise<QrCode> {
     return this.qrCodeModel.findByIdAndUpdate(id, { url: newUrl }, { new: true });
+  }
+
+  async getMyQrCodes(userId: string): Promise<QrCode[]> {
+    return this.qrCodeModel.find({ userId }).exec();
   }
 }

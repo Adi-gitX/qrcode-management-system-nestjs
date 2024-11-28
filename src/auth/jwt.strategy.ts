@@ -5,11 +5,11 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly authService: AuthService) {
+  constructor(private authService: AuthService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey:'CutUICJ98v3k+ASNfM5HmoKQgKnlk2yWTM+xnd1LJ8swBJpRIKCt0KuIJKIdYlHJ7tJQEQWVn690Hs5N2lGrLQ==',
+      secretOrKey: process.env.JWT_SECRET,
     });
   }
 
