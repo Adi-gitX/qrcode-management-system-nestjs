@@ -1,5 +1,5 @@
+Here is the improved and neatly organized version of the README file, separated into blocks and without markdown at the start:
 
-```markdown
 # QR Code Management System
 
 A complete QR Code Management System built with **NestJS**, **MongoDB**, and **JWT** for authentication. It allows users to generate static and dynamic QR codes, track events, and view analytics.
@@ -20,30 +20,37 @@ A complete QR Code Management System built with **NestJS**, **MongoDB**, and **J
 ## Installation
 
 ### Prerequisites
+
 Ensure you have the following installed:
 - Node.js
 - MongoDB
 
 ### Steps
+
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/Adi-gitX/qrcode-management-system-nestjs.git
    cd qrcode-management-system-nestjs
    ```
 
 2. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 3. **Configure environment variables**:
+
    Create a `.env` file in the root directory and include:
+
    ```env
    MONGODB_URI=your-mongodb-connection-string
    JWT_SECRET=your-jwt-secret
    ```
 
 4. **Start the application**:
+
    ```bash
    npm run start
    ```
@@ -52,7 +59,8 @@ Ensure you have the following installed:
 
 ## API Endpoints
 
-### **Authentication**
+### Authentication
+
 #### **Signup**
 - **Method**: `POST`
 - **URL**: `/auth/signup`
@@ -96,7 +104,8 @@ Ensure you have the following installed:
 
 ---
 
-### **QR Code Management**
+### QR Code Management
+
 #### **Generate Static QR Code**
 - **Method**: `POST`
 - **URL**: `/qr/static`
@@ -158,7 +167,8 @@ Ensure you have the following installed:
 
 ---
 
-### **Event Tracking**
+### Event Tracking
+
 #### **Track Event**
 - **Method**: `POST`
 - **URL**: `/qr/{id}/track`
@@ -202,7 +212,8 @@ Ensure you have the following installed:
 
 ---
 
-### **Analytics**
+### Analytics
+
 #### **Get Analytics**
 - **Method**: `GET`
 - **URL**: `/analytics/{id}`
@@ -221,4 +232,3 @@ Ensure you have the following installed:
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-```
