@@ -9,7 +9,8 @@ export class EventController {
   @UseGuards(JwtAuthGuard)
   @Post(':id/track')
   async trackEvent(@Param('id') id: string, @Body() eventData: any) {
-    return this.eventService.trackEvent(id, eventData);
+    await this.eventService.trackEvent(id, eventData);
+    return { success: true };
   }
 
   @UseGuards(JwtAuthGuard)

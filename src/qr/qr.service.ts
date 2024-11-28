@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import * as QRCode from 'qrcode';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -18,8 +18,16 @@ export class QrService {
     return qrCode;
   }
 
-  async updateDynamicQrCode(id: string, newUrl: string): Promise<QrCode> {
-    return this.qrCodeModel.findByIdAndUpdate(id, { url: newUrl }, { new: true });
+  async updateDynamicQrCode(id: string, newUrl: string, userId: string): Promise<QrCode> {
+    const qrCode = await this.qrCodeModel.findById(id).exec();
+    if (!qrCode) {
+      throw new NotFoundException('QR code not found');
+    }
+    if (qrCode.userId !== userId) {
+      throw new UnauthorizedException('You are not authorized to update this QR code');
+    }
+    qrCode.url = newUrl;
+    return qrCode.save();
   }
 
   async getMyQrCodes(userId: string): Promise<QrCode[]> {

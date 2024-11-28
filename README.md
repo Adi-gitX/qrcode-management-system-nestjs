@@ -260,7 +260,13 @@ Here is the updated README for the QR Code Management API with Postman collectio
   ```
 
 ---
+## Handling High Traffic for Event Tracking
 
+To handle high traffic for event tracking, we can use a queue system like **Bull** with **Redis**. This allows us to offload event tracking requests to a background job queue, helping to scale the application and handle large volumes of requests without impacting the performance of the core API operations.
+
+Using **Bull** with **Redis**, events are placed in a queue, processed asynchronously, and can be stored or analyzed later, providing an efficient way to manage high traffic loads for event tracking.
+
+---
 ## Example Postman Collection
 
 You can create a Postman collection with the above endpoints. Below is an example JSON structure for the collection:

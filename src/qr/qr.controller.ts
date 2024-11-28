@@ -20,8 +20,8 @@ export class QrController {
 
   @UseGuards(JwtAuthGuard)
   @Put(':id/update')
-  async updateDynamicQrCode(@Param('id') id: string, @Body('newUrl') newUrl: string) {
-    return this.qrService.updateDynamicQrCode(id, newUrl);
+  async updateDynamicQrCode(@Param('id') id: string, @Body('newUrl') newUrl: string, @Request() req) {
+    return this.qrService.updateDynamicQrCode(id, newUrl, req.user.userId);
   }
 
   @UseGuards(JwtAuthGuard)
